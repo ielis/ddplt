@@ -6,24 +6,6 @@ Useful utility functions for evaluation of ML.
 The main motivation behind this package is to create a single place where the utility functions for ML projects are located. These functions represent the best I was able to scrape from various tutorials or offical documentation on the web.
 
 
-## Learning curve
-
-Create plot showing performance evaluation for different sizes of training data. The method should accept: 
-- existing `Axes`
-- performance measure (e.g. accuracy, MSE, precision, recall, etc.)
-- ...
-
-
-## ROC curve
-
-Plot showing Receiver Operating Characteristics of a predictor.
-
-
-## Correlation heatmap
-
-Grid where each square has a color denoting strength of a correlation between predictors. You can choose between Pearson and Spearman correlation coefficient, the result is shown inside the square. 
-
-
 ## Confusion matrix
 
 This function prints and plots the confusion matrix.
@@ -42,3 +24,22 @@ ax, cm = plot_confusion_matrix(y_test, y_pred, class_names)
 
 will create a plot like:
 ![conf_matrix](img/cm_hip_hop_pop.png)
+
+
+## Learning curve
+
+Create plot showing performance evaluation for different sizes of training data. The method should accept: 
+- existing `Axes`
+- performance measure (e.g. accuracy, MSE, precision, recall, etc.)
+- ...
+
+
+## ROC curve
+
+Plot showing Receiver Operating Characteristics of a predictor.
+
+
+## Correlation heatmap
+
+Grid where each square has a color denoting strength of a correlation between predictors. You can choose between Pearson and Spearman correlation coefficient, the result is shown inside the square. 
+

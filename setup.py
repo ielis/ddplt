@@ -1,4 +1,5 @@
 import ddplt
+import io
 import setuptools
 
 setuptools.setup(name="ddplt",
@@ -8,7 +9,9 @@ setuptools.setup(name="ddplt",
                                    'scikit-learn>=0.21',
                                    'numpy>=1.16',
                                    'pandas>=0.23'],
-                 package_data={'': 'img/*'},
+
+                 long_description=io.open('README.md', encoding='utf-8').read(),
+                 long_description_content_type='text/markdown',
 
                  author="Daniel Danis",
                  author_email="daniel.gordon.danis@gmail.com",

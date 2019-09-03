@@ -1,5 +1,7 @@
 # ddplt
 
+[![PyPI version](https://badge.fury.io/py/ddplt.svg)](https://badge.fury.io/py/ddplt)
+
 Useful utility functions for evaluation of ML.
 
 **Motivation:**

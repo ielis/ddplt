@@ -5,7 +5,7 @@ import setuptools
 setuptools.setup(name="ddplt",
                  version=ddplt.__version__,
                  packages=["ddplt"],
-                 install_requires=['matplotlib>=3.1'
+                 install_requires=['matplotlib>=3.1',
                                    'scikit-learn>=0.21',
                                    'numpy>=1.16',
                                    'pandas>=0.23'],

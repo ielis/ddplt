@@ -1,22 +1,27 @@
+from setuptools import setup, find_packages
+
 import ddplt
-import io
-import setuptools
 
-setuptools.setup(name="ddplt",
-                 version=ddplt.__version__,
-                 packages=["ddplt"],
-                 install_requires=['matplotlib>=3.1',
-                                   'scikit-learn>=0.21',
-                                   'numpy>=1.16',
-                                   'pandas>=0.23'],
+# read requirements
+with open('requirements.txt') as f:
+    requirements = f.read().splitlines()
 
-                 long_description=io.open('README.md', encoding='utf-8').read(),
-                 long_description_content_type='text/markdown',
+# read description
+with open("README.md", 'r') as fh:
+    long_description = fh.read()
 
-                 author="Daniel Danis",
-                 author_email="daniel.gordon.danis@gmail.com",
-                 url="https://github.com/ielis/ddplt",
-                 description="Useful utility functions for evaluation of ML",
-                 license='GPLv3',
-                 keywords="plotting machine learning evaluation metrics",
-                 test_suite='tests')
+setup(name="ddplt",
+      version=ddplt.__version__,
+      packages=find_packages(),
+      install_requires=requirements,
+
+      long_description=long_description,
+      long_description_content_type='text/markdown',
+
+      author="Daniel Danis",
+      author_email="daniel.gordon.danis@gmail.com",
+      url="https://github.com/ielis/ddplt",
+      description="Useful utility functions for evaluation of ML",
+      license='GPLv3',
+      keywords="plotting machine learning evaluation metrics",
+      test_suite='tests')

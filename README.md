@@ -16,12 +16,12 @@ The code:
 
 ```python
 import numpy as np
-from ddplt import plot_confusion_matrix
+from ddplt import plot_confusion_heatmap
 
 y_test = np.array([0, 0, 1, 1, 2, 0])
 y_pred = np.array([0, 1, 1, 2, 2, 0])
 class_names = np.array(['hip', 'hop', 'pop'])
-ax, cm = plot_confusion_matrix(y_test, y_pred, class_names)
+ax, cm = plot_confusion_heatmap(y_test, y_pred, class_names)
 ```
 
 will create a plot like:

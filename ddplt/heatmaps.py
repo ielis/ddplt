@@ -1,14 +1,16 @@
+import pandas as pd
 import matplotlib.pyplot as plt
 import numpy as np
 from sklearn.metrics import confusion_matrix
 from sklearn.utils.multiclass import unique_labels
+from scipy.stats import spearmanr, pearsonr
 
 
-def plot_confusion_matrix(y_true, y_pred, classes,
-                          normalize=False,
-                          title=None,
-                          cmap="Blues",
-                          ax=None):
+def plot_confusion_heatmap(y_true, y_pred, classes,
+                           normalize=False,
+                           title=None,
+                           cmap="Blues",
+                           ax=None):
     """
     This function prints and plots the confusion matrix.
     Normalization can be applied by setting `normalize=True`.
@@ -64,3 +66,23 @@ def plot_confusion_matrix(y_true, y_pred, classes,
         ax.figure.tight_layout()
 
     return ax, cm
+
+
+def plot_correlation_heatmap(data: pd.DataFrame, x_vars: list = None, y_vars: list = None, method='spearman',
+                             title=None,
+                             cmap="Blues",
+                             ax: plt.Axes = None):
+    if not title:
+        title = "{} corr coefficients".format(method.capitalize())
+    if method == 'spearman':
+        corr_func = spearmanr
+    elif method == 'pearson':
+        corr_func = pearsonr
+    else:
+        raise ValueError("Unknown method '%s'. Supported: {spearman, pearson}" % method)
+
+    _x = list(data.columns) if not x_vars else x_vars
+    _y = list(data.columns) if not y_vars else y_vars
+    r, p = corr_func(data[_x], data[_y])
+
+    return r, p

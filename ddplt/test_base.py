@@ -1,9 +1,9 @@
 import unittest
 
-from sklearn.datasets import load_iris
+from sklearn.datasets import load_iris, make_moons
+from sklearn.linear_model import LogisticRegression
 from sklearn.model_selection import train_test_split
 from sklearn.svm import SVC
-from sklearn.tree import DecisionTreeClassifier
 
 
 class TestBase(unittest.TestCase):
@@ -30,8 +30,6 @@ class TwoClassClassificationTestBase(unittest.TestCase):
 
     def setUp(self) -> None:
         # import some data to play with
-        iris = load_iris()
-        self.X = iris.data
-        self.y = iris.target == 1  # is versicolor (to have a binary classification problem)
+        self.X, self.y = make_moons(500, noise=3, random_state=123)
 
-        self.estimator = DecisionTreeClassifier()
+        self.estimator = LogisticRegression()

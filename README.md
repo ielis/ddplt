@@ -2,10 +2,7 @@
 
 [![PyPI version](https://badge.fury.io/py/ddplt.svg)](https://badge.fury.io/py/ddplt)
 
-Useful utility functions for evaluation of ML.
-
-**Motivation:**
-The main motivation behind this package is to create a single place where the utility functions for ML projects are located. These functions represent the best I was able to scrape from various tutorials or offical documentation on the web.
+A code from my ML projects with a potential of being reusable.
 
 
 ## Confusion matrix
@@ -16,7 +13,7 @@ The code:
 
 ```python
 import numpy as np
-from ddplt import plot_confusion_heatmap
+from ddplt.heatmaps import plot_confusion_heatmap
 
 y_test = np.array([0, 0, 1, 1, 2, 0])
 y_pred = np.array([0, 1, 1, 2, 2, 0])
@@ -24,7 +21,7 @@ class_names = np.array(['hip', 'hop', 'pop'])
 ax, cm = plot_confusion_heatmap(y_test, y_pred, class_names)
 ```
 
-will create a plot like:
+creates a plot like this:
 ![conf_matrix](img/cm_hip_hop_pop.png)
 
 

@@ -1,34 +1,18 @@
-import pandas as pd
 import matplotlib.pyplot as plt
 import numpy as np
+import pandas as pd
 
 from ddplt.heatmaps import plot_correlation_heatmap, plot_confusion_heatmap
+from .test_base import TestBase
 
-import unittest
-
+# set this to true if you want to see the plots
 interactive = False
 
 
-class TestDdplt(unittest.TestCase):
+class TestDdplt(TestBase):
 
     def setUp(self) -> None:
-        from sklearn import svm, datasets
-        from sklearn.model_selection import train_test_split
-
-        # import some data to play with
-        iris = datasets.load_iris()
-        self.X = iris.data
-        self.y = iris.target
-        self.class_names = iris.target_names
-        self.fnames = iris.feature_names
-
-        # Split the data into a training set and a test set
-        self.X_train, self.X_test, self.y_train, self.y_test = train_test_split(self.X, self.y, random_state=0)
-
-        # Run classifier, using a model that is too regularized (C too low) to see
-        # the impact on the results
-        clf = svm.SVC(kernel='linear', C=0.01)
-        self.y_pred = clf.fit(self.X_train, self.y_train).predict(self.X_test)
+        super(TestDdplt, self).setUp()
 
     def test_confusion_heatmap(self):
         """Test correctness of confusion heatmap creation.
@@ -50,5 +34,5 @@ class TestDdplt(unittest.TestCase):
 
         :return:
         """
-        df = pd.DataFrame(data=self.X[:30], columns=self.fnames)
+        df = pd.DataFrame(data=self.X[:30], columns=self.feature_names)
         print(plot_correlation_heatmap(df))

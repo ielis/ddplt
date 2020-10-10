@@ -1,7 +1,5 @@
 from setuptools import setup, find_packages
 
-import ddplt
-
 # read requirements
 with open('requirements.txt') as f:
     requirements = f.read().splitlines()
@@ -11,7 +9,7 @@ with open("README.md", 'r') as fh:
     long_description = fh.read()
 
 setup(name="ddplt",
-      version=ddplt.__version__,
+      version='0.0.2.dev2',
       packages=find_packages(),
       install_requires=requirements,
 

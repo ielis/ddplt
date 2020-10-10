@@ -2,7 +2,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import numpy as np
 
-from ddplt import *
+from ddplt.heatmaps import plot_correlation_heatmap, plot_confusion_heatmap
 
 import unittest
 

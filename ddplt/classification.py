@@ -14,6 +14,43 @@ _lim = (-.05, 1.05)
 def draw_roc_prc_cv(estimator, X, y, cv, groups=None,
                     roc_ax=None, prc_ax=None,
                     roc_auc_average='weighted', ap_average='weighted'):
+    """Run k-fold cross-validation and draw the receiver operating characteristic (ROC)
+    as well as the precision-recall (PR) curves for each fold. Mean ROC and PR curves and area +-1 std. dev. are
+    plotted as well.
+
+        Parameters
+        ----------
+        estimator : {sklearn estimator}
+            The estimator with specific hyperparameters
+
+        X : {array-like, sparse matrix}, shape (n_samples, n_features)
+            Training vectors, where n_samples is the number of samples and n_features is the number of features
+
+        y : array-like, shape (n_samples,)
+            Target values - class labels
+
+        cv : cross-validation generator
+            Generator of indices for splitting the dataset into train/test set
+
+        groups : array-like, with shape (n_samples,), optional
+            Group labels for the samples used while splitting the dataset into train/test set.
+
+        roc_ax : matplotlib Axes, default None
+            Axes to draw the ROC figure on
+
+        prc_ax : matplotlib Axes, default None
+            Axes to draw the PR figure on
+
+        roc_auc_average : {None, 'weighted', 'macro', 'micro', 'samples'}, optional, default 'weighted'
+            The type of averaging performed on the data when calculating AUROC score
+
+        ap_average : {None, 'weighted', 'macro', 'micro', 'samples'}, optional, default 'weighted'
+            The type of averaging performed on the data when calculating AUPRC score
+
+        Returns
+        -------
+        self : None
+    """
     _check_input(estimator, cv)
 
     if not roc_ax or not prc_ax:
@@ -48,6 +85,36 @@ def draw_roc_prc_cv(estimator, X, y, cv, groups=None,
 
 
 def draw_roc_cv(estimator, X, y, cv, groups=None, roc_auc_average='weighted', ax=None):
+    """Run k-fold cross-validation and draw the ROC curves for each fold as well as the mean ROC curve.
+
+        Parameters
+        ----------
+        estimator : {sklearn estimator}
+            The estimator with specific hyperparameters that will be fitted and used for prediction on the test set
+
+        X : {array-like, sparse matrix}, shape (n_samples, n_features)
+            Training vectors, where n_samples is the number of samples
+            and n_features is the number of features.
+
+        y : array-like, shape (n_samples,)
+            Target values - class labels
+
+        cv : cross-validation generator
+            Generator of indices for splitting the dataset into train/test set
+
+        groups : array-like, with shape (n_samples,), optional
+            Group labels for the samples used while splitting the dataset into train/test set.
+
+        roc_auc_average : {None, 'weighted', 'macro', 'micro', 'samples'}, optional, default 'weighted'
+            The type of averaging performed on the data when calculating AUROC score
+
+        ax : matplotlib Axes, default None
+            Matplotlib
+
+        Returns
+        -------
+        self : None
+        """
     _check_input(estimator, cv)
 
     if not ax:
@@ -70,6 +137,36 @@ def draw_roc_cv(estimator, X, y, cv, groups=None, roc_auc_average='weighted', ax
 
 
 def draw_prc_cv(estimator, X, y, cv, groups=None, ap_average='weighted', ax=None):
+    """Run k-fold cross-validation and draw the precision-recall curves for each fold as well as the mean
+    precision-recall curve.
+
+        Parameters
+        ----------
+        estimator : {sklearn estimator}
+            The estimator with specific hyperparameters that will be fitted and used for prediction on the test set
+
+        X : {array-like, sparse matrix}, shape (n_samples, n_features)
+            Training vectors, where n_samples is the number of samples and n_features is the number of features
+
+        y : array-like, shape (n_samples,)
+            Target values - class labels
+
+        cv : cross-validation generator
+            Generator of indices for splitting the dataset into train/test set
+
+        groups : array-like, with shape (n_samples,), optional
+            Group labels for the samples used while splitting the dataset into train/test set.
+
+        ap_average : {None, 'weighted', 'macro', 'micro', 'samples'}, optional, default 'weighted'
+            The type of averaging performed on the data when calculating AUPRC score
+
+        ax : matplotlib Axes, default None
+            Axes to draw the figure on
+
+        Returns
+        -------
+        self : None
+    """
     _check_input(estimator, cv)
 
     if not ax:

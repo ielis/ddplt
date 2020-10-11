@@ -13,23 +13,27 @@ class TestBase(unittest.TestCase):
         iris = load_iris()
         self.X = iris.data
         self.y = iris.target
-        self.y_is_setosa = iris.target == 1  # to have a binary classification problem
+        # self.y_is_setosa = iris.target == 1  # to have a binary classification problem
         self.class_names = iris.target_names
         self.feature_names = iris.feature_names
 
         # Split the data into a training set and a test set
         self.X_train, self.X_test, self.y_train, self.y_test = train_test_split(self.X, self.y, random_state=0)
 
-        # Run classifier, using a model that is too regularized (C too low) to see
-        # the impact on the results
-        self.svc = SVC(kernel='linear', C=0.01)
-        self.y_pred = self.svc.fit(self.X_train, self.y_train).predict(self.X_test)
 
 
-class TwoClassClassificationTestBase(unittest.TestCase):
+
+class BinaryClassificationTestBase(unittest.TestCase):
 
     def setUp(self) -> None:
         # import some data to play with
         self.X, self.y = make_moons(1_000, noise=.2, random_state=123)
 
         self.estimator = LogisticRegression()
+
+
+class MulticlassClassificationTestBase(unittest.TestCase):
+
+    def setUp(self) -> None:
+        # import some data to play with
+        self.X, self.y = load_iris(return_X_y=True)

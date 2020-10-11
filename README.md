@@ -56,6 +56,8 @@ The figure consists of:
 
 Areas under ROC and PR curves are reported in the legend.
 
+*Note:* Use the functions `draw_roc_cv` or `draw_prc_cv` to draw ROC or PR curves only 
+
 ## Learning curve
 
 Create plot showing performance evaluation for different sizes of training data. The method should accept: 

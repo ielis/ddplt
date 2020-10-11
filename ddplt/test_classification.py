@@ -1,16 +1,17 @@
 import unittest
 
 import matplotlib.pyplot as plt
-from sklearn.model_selection import KFold
+from sklearn.linear_model import LogisticRegression
+from sklearn.model_selection import KFold, StratifiedKFold
 
 from ddplt.classification import draw_roc_cv, draw_prc_cv, draw_roc_prc_cv
-from .test_base import TwoClassClassificationTestBase
+from .test_base import BinaryClassificationTestBase, MulticlassClassificationTestBase
 
 # set this to true if you want to see the plots
 interactive = False
 
 
-class TestClassification(TwoClassClassificationTestBase):
+class TestClassification(BinaryClassificationTestBase):
 
     def setUp(self) -> None:
         super(TestClassification, self).setUp()
@@ -44,3 +45,16 @@ class TestClassification(TwoClassClassificationTestBase):
         ax.scatter(self.X[:, 0], self.X[:, 1], c=self.y)
         if interactive:
             plt.show()
+
+
+class TestMulticlassClassification(MulticlassClassificationTestBase):
+
+    def setUp(self) -> None:
+        super(TestMulticlassClassification, self).setUp()
+        self.estimator = LogisticRegression()
+
+        self.cv = StratifiedKFold(n_splits=5, shuffle=True, random_state=123)
+
+    def test_draw_roc_cv(self):
+        # nothing at the moment
+        pass

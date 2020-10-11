@@ -1,6 +1,7 @@
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
+from sklearn.svm import SVC
 
 from ddplt.heatmaps import plot_correlation_heatmap, draw_confusion_heatmap
 from .test_base import TestBase
@@ -9,10 +10,14 @@ from .test_base import TestBase
 interactive = False
 
 
-class TestDdplt(TestBase):
+class TestHeatmaps(TestBase):
 
     def setUp(self) -> None:
-        super(TestDdplt, self).setUp()
+        super(TestHeatmaps, self).setUp()
+
+        # Run classifier, using a model that is regularized way too much (C too low)
+        # to see the impact on the results
+        self.y_pred = SVC(kernel='linear', C=0.01).fit(self.X_train, self.y_train).predict(self.X_test)
 
     def test_confusion_heatmap(self):
         """Test correctness of confusion heatmap creation.
@@ -35,4 +40,5 @@ class TestDdplt(TestBase):
         :return:
         """
         df = pd.DataFrame(data=self.X[:30], columns=self.feature_names)
-        print(plot_correlation_heatmap(df))
+        plot_correlation_heatmap(df)
+        # todo - write tests

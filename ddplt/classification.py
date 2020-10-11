@@ -11,7 +11,7 @@ _dpi = 120
 _lim = (-.05, 1.05)
 
 
-def draw_roc_prc_cv(estimator, X, y, cv,
+def draw_roc_prc_cv(estimator, X, y, cv, groups=None,
                     roc_ax=None, prc_ax=None,
                     roc_auc_average='weighted', ap_average='weighted'):
     _check_input(estimator, cv)
@@ -23,7 +23,7 @@ def draw_roc_prc_cv(estimator, X, y, cv,
     precs, recls = [], []
     aucs, aps = [], []
 
-    for train_idxs, test_idxs in cv.split(X, y):
+    for train_idxs, test_idxs in cv.split(X, y, groups):
         X_train = X.iloc[train_idxs] if isinstance(X, pd.DataFrame) else X[train_idxs]
         X_test = X.iloc[test_idxs] if isinstance(X, pd.DataFrame) else X[test_idxs]
         le = clone(estimator).fit(X_train, y[train_idxs])
@@ -47,14 +47,14 @@ def draw_roc_prc_cv(estimator, X, y, cv,
     _draw_prc(precs, recls, aps, prc_ax)
 
 
-def draw_roc_cv(estimator, X, y, cv, roc_auc_average='weighted', ax=None):
+def draw_roc_cv(estimator, X, y, cv, groups=None, roc_auc_average='weighted', ax=None):
     _check_input(estimator, cv)
 
     if not ax:
         fig, ax = plt.subplots(figsize=(6, 4), dpi=_dpi)
 
     fprs, tprs, aucs = [], [], []
-    for train_idxs, test_idxs in cv.split(X, y):
+    for train_idxs, test_idxs in cv.split(X, y, groups):
         X_train = X.iloc[train_idxs] if isinstance(X, pd.DataFrame) else X[train_idxs]
         X_test = X.iloc[test_idxs] if isinstance(X, pd.DataFrame) else X[test_idxs]
 
@@ -69,14 +69,14 @@ def draw_roc_cv(estimator, X, y, cv, roc_auc_average='weighted', ax=None):
     _draw_roc(fprs, tprs, aucs, ax)
 
 
-def draw_prc_cv(estimator, X, y, cv, ap_average='weighted', ax=None):
+def draw_prc_cv(estimator, X, y, cv, groups=None, ap_average='weighted', ax=None):
     _check_input(estimator, cv)
 
     if not ax:
         fig, ax = plt.subplots(figsize=(6, 4), dpi=_dpi)
 
     precs, recls, aps = [], [], []
-    for train_idxs, test_idxs in cv.split(X, y):
+    for train_idxs, test_idxs in cv.split(X, y, groups):
         X_train = X.iloc[train_idxs] if isinstance(X, pd.DataFrame) else X[train_idxs]
         X_test = X.iloc[test_idxs] if isinstance(X, pd.DataFrame) else X[test_idxs]
         y_proba = clone(estimator).fit(X_train, y[train_idxs]).predict_proba(X_test)
@@ -118,7 +118,7 @@ def _draw_roc(fprs: list, tprs: list, aucs: list, ax):
     lower = np.maximum(mean_tpr - (std_factor * std_tpr), 0)
     upper = np.minimum(mean_tpr + (std_factor * std_tpr), 1)
     ax.fill_between(mean_fpr, lower, upper,
-                    color=blue_light, alpha=.25, label=r'$\pm{:d}$ std. dev.'.format(std_factor))
+                    color=blue_light, linewidth=0, alpha=.25, label=r'$\pm{:d}$ std. dev.'.format(std_factor))
 
     ax.set(title='Receiver operating characteristic', xlabel='False Positive Rate', ylabel='True Positive Rate',
            aspect='equal', xlim=_lim, ylim=_lim)
@@ -148,7 +148,7 @@ def _draw_prc(precs: list, recls: list, aps: list, ax):
     lower = np.maximum(mean_prec - (std_factor * std_prec), 0)
     upper = np.minimum(mean_prec + (std_factor * std_prec), 1)
     ax.fill_between(mean_rec, lower, upper,
-                    color=blue_light, alpha=.25, label=r'$\pm{:d}$ std. dev'.format(std_factor))
+                    color=blue_light, linewidth=0, alpha=.25, label=r'$\pm{:d}$ std. dev'.format(std_factor))
 
     ax.set(title='Precision-recall curve', xlabel='Recall', ylabel='Precision',
            aspect='equal', xlim=_lim, ylim=_lim)

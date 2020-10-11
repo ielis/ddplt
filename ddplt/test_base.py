@@ -30,6 +30,6 @@ class TwoClassClassificationTestBase(unittest.TestCase):
 
     def setUp(self) -> None:
         # import some data to play with
-        self.X, self.y = make_moons(500, noise=3, random_state=123)
+        self.X, self.y = make_moons(1_000, noise=.2, random_state=123)
 
         self.estimator = LogisticRegression()

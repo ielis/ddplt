@@ -2,7 +2,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 
-from ddplt.heatmaps import plot_correlation_heatmap, plot_confusion_heatmap
+from ddplt.heatmaps import plot_correlation_heatmap, draw_confusion_heatmap
 from .test_base import TestBase
 
 # set this to true if you want to see the plots
@@ -20,7 +20,7 @@ class TestDdplt(TestBase):
         Set `interactive = True` if you want to see the created plot
         """
         fig, ax = plt.subplots(1, 2, figsize=(12, 6))
-        ax, cm = plot_confusion_heatmap(self.y_test, self.y_pred, self.class_names, title="The confusion matrix",
+        ax, cm = draw_confusion_heatmap(self.y_test, self.y_pred, self.class_names, title="The confusion matrix",
                                         normalize=True, ax=ax[0])
 
         self.assertIsNone(  # return None if the arrays are almost equal, raise AssertionError otherwise

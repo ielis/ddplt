@@ -6,7 +6,7 @@ from sklearn.utils.multiclass import unique_labels
 from scipy.stats import spearmanr, pearsonr
 
 
-def plot_confusion_heatmap(y_true, y_pred, classes,
+def draw_confusion_heatmap(y_true, y_pred, classes,
                            normalize=False,
                            title=None,
                            cmap="Blues",

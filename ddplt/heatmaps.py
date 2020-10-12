@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 from sklearn.metrics import confusion_matrix
 from sklearn.utils.multiclass import unique_labels
-from scipy.stats import spearmanr, pearsonr
+import scipy.stats as st
 
 
 def draw_confusion_heatmap(y_true, y_pred, classes,
@@ -68,21 +68,22 @@ def draw_confusion_heatmap(y_true, y_pred, classes,
     return ax, cm
 
 
-def plot_correlation_heatmap(data: pd.DataFrame, x_vars: list = None, y_vars: list = None, method='spearman',
+def plot_correlation_heatmap(data: pd.DataFrame, x_vars: list = None, y_vars: list = None,
+                             method='spearman',
                              title=None,
                              cmap="Blues",
                              ax: plt.Axes = None):
     if not title:
         title = "{} corr coefficients".format(method.capitalize())
     if method == 'spearman':
-        corr_func = spearmanr
+        corr_func = st.spearmanr
     elif method == 'pearson':
-        corr_func = pearsonr
+        corr_func = st.pearsonr
     else:
         raise ValueError("Unknown method '%s'. Supported: {spearman, pearson}" % method)
 
-    _x = list(data.columns) if not x_vars else x_vars
-    _y = list(data.columns) if not y_vars else y_vars
-    r, p = corr_func(data[_x], data[_y])
-
+    _x_labels = list(data.columns) if not x_vars else x_vars
+    _y_labels = list(data.columns) if not y_vars else y_vars
+    r, p = corr_func(data[_x_labels], data[_y_labels])
+    # todo - make a figure
     return r, p

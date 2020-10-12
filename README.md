@@ -60,18 +60,16 @@ Areas under ROC and PR curves are reported in the legend.
 
 ## Learning curve
 
+TODO - not yet implemented
+
 Create plot showing performance evaluation for different sizes of training data. The method should accept: 
 - existing `Axes`
 - performance measure (e.g. accuracy, MSE, precision, recall, etc.)
 - ...
 
-
-## ROC curve
-
-Plot showing Receiver Operating Characteristics of a predictor.
-
-
 ## Correlation heatmap
+
+TODO - not yet implemented
 
 Grid where each square has a color denoting strength of a correlation between predictors. You can choose between Pearson and Spearman correlation coefficient, the result is shown inside the square. 
 

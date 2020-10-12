@@ -2,8 +2,14 @@
 
 [![PyPI version](https://badge.fury.io/py/ddplt.svg)](https://badge.fury.io/py/ddplt)
 
-A code from my ML projects with a potential of being reusable.
+A package with code from my ML projects that has a potential of being reusable.
 
+## Installation
+
+The package installation is simple, since the repo is available on PyPi:
+```bash
+pip install ddplt
+```
 
 ## Confusion matrix
 

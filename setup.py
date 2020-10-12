@@ -9,7 +9,7 @@ with open("README.md", 'r') as fh:
     long_description = fh.read()
 
 setup(name="ddplt",
-      version='0.0.2',
+      version='0.0.3.dev0',
       packages=find_packages(),
       install_requires=requirements,
 

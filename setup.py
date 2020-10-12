@@ -9,7 +9,7 @@ with open("README.md", 'r') as fh:
     long_description = fh.read()
 
 setup(name="ddplt",
-      version='0.0.2.dev2',
+      version='0.0.2',
       packages=find_packages(),
       install_requires=requirements,
 
@@ -19,7 +19,7 @@ setup(name="ddplt",
       author="Daniel Danis",
       author_email="daniel.gordon.danis@gmail.com",
       url="https://github.com/ielis/ddplt",
-      description="Useful utility functions for evaluation of ML",
+      description="A package with code from my ML projects that has a potential of being reusable",
       license='GPLv3',
       keywords="plotting machine learning evaluation metrics",
       test_suite='tests')
